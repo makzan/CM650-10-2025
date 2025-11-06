@@ -1,0 +1,245 @@
+<!-- Chosen Palette: Coca-Cola Inspired (Warm White, Charcoal, Red Accent) -->
+<!-- Application Structure Plan: The SPA uses a clean, single-page layout with a sticky top navigation for easy access to all content sections. The core interactive element is a tabbed interface for the "AI 實驗" (AI Experiments) section, allowing users to non-linearly explore the case studies for 2023, 2024, and 2025. This is more engaging than a simple linear report. The structure is thematic: 1. Hero (Core Thesis), 2. Timeline (Interactive Tabs), 3. Comparison (Direct Analysis), 4. Findings (Key Takeaways). This IA was chosen to first present the report's main argument, then provide interactive evidence (Timeline), follow with a key analytical point (Comparison), and finally summarize the lessons (Findings), guiding the user from thesis to conclusion in a logical, explorable flow. -->
+<!-- Visualization & Content Choices: Report Info: Core thesis ("Lack of emotion is the fatal flaw") -> Goal: Inform (Hero) -> Viz/Method: Large H1/Quote text -> Interaction: None -> Justification: Immediately sets the theme. | Report Info: Chronology (2023, 2024, 2025 ads) -> Goal: Organize/Compare -> Viz/Method: Tabbed Interface (HTML/CSS/JS) -> Interaction: Click tabs to show/hide content -> Justification: Allows non-linear exploration, more interactive than text. | Report Info: 2025 AI vs. Live-Action -> Goal: Compare -> Viz/Method: Two-column HTML/Tailwind layout with icons (🤖 vs ❤️) -> Interaction: Reading -> Justification: Directly highlights the report's central conflict. | Report Info: Key Takeaways (Narrative, LinkedIn version, Tech vs. Soul) -> Goal: Inform (Summary) -> Viz/Method: 3-column Card layout (HTML/Tailwind) -> Interaction: Reading -> Justification: Summarizes insights in digestible chunks. | No quantitative data was present, so no charts (Chart.js/Plotly) were used. -->
+<!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+<!DOCTYPE html>
+<html lang="zh-Hant" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>可口可樂 AI 廣告分析</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background-color: #f8f8f8;
+        }
+        .coke-red {
+            color: #E61D2B;
+        }
+        .bg-coke-red {
+            background-color: #E61D2B;
+        }
+        .tab-active {
+            background-color: #E61D2B;
+            color: white;
+            border-color: #E61D2B;
+        }
+        .tab-inactive {
+            background-color: white;
+            color: #374151;
+            border-color: #D1D5DB;
+        }
+        .tab-inactive:hover {
+            background-color: #f9fafb;
+        }
+        section {
+            padding-top: 6rem;
+            padding-bottom: 6rem;
+        }
+        @media (max-width: 768px) {
+            section {
+                padding-top: 4rem;
+                padding-bottom: 4rem;
+            }
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <header class="bg-white shadow-md fixed top-0 left-0 right-0 z-50">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="text-xl font-bold coke-red">AI 廣告分析</div>
+            <ul class="flex space-x-4 md:space-x-6">
+                <li><a href="#home" class="text-gray-600 hover:text-gray-900 transition-colors text-sm md:text-base">核心</a></li>
+                <li><a href="#timeline" class="text-gray-600 hover:text-gray-900 transition-colors text-sm md:text-base">AI 實驗</a></li>
+                <li><a href="#comparison" class="text-gray-600 hover:text-gray-900 transition-colors text-sm md:text-base">對比</a></li>
+                <li><a href="#findings" class="text-gray-600 hover:text-gray-900 transition-colors text-sm md:text-base">洞察</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="bg-white pt-32 pb-32 md:pt-48 md:pb-48 text-center">
+            <div class="container mx-auto px-6">
+                <h2 class="text-lg md:text-xl font-semibold text-gray-600 uppercase tracking-wider">探討靈魂深處的共鳴</h2>
+                <h1 class="text-4xl md:text-6xl font-bold my-4">可口可樂 AI 廣告分析</h1>
+                <p class="text-xl md:text-2xl text-gray-700 max-w-3xl mx-auto mt-8">
+                    「...無論是否使用 AI，這支影片缺乏敘事與情感連結才是<span class="font-bold coke-red">致命傷</span>。」
+                </p>
+            </div>
+        </section>
+
+        <section id="timeline" class="bg-gray-50">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl font-bold text-center mb-4">AI 廣告實驗</h2>
+                <p class="text-lg text-gray-600 text-center max-w-3xl mx-auto mb-12">
+                    可口可樂的 AI 廣告之旅並非一帆風順。點擊下方的年份，探索從 2023 年的初步嘗試到 2025 年的雙重策略，看看他們的技術和口碑如何演變。
+                </p>
+                
+                <div class="flex justify-center space-x-2 md:space-x-4 mb-8">
+                    <button data-tab="2023" class="tab-button text-base md:text-lg font-semibold py-3 px-6 rounded-full border-2 transition-all duration-300 tab-active">
+                        2023
+                    </button>
+                    <button data-tab="2024" class="tab-button text-base md:text-lg font-semibold py-3 px-6 rounded-full border-2 transition-all duration-300 tab-inactive">
+                        2024
+                    </button>
+                    <button data-tab="2025" class="tab-button text-base md:text-lg font-semibold py-3 px-6 rounded-full border-2 transition-all duration-300 tab-inactive">
+                        2025
+                    </button>
+                </div>
+
+                <div class="relative max-w-4xl mx-auto">
+                    <div id="tab-2023" class="tab-content bg-white p-8 rounded-xl shadow-lg">
+                        <h3 class="text-2xl font-bold mb-4">2023: 《Masterpiece》</h3>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-green-100 text-green-800 text-sm font-medium px-3 py-1 rounded-full">👍 好評</span>
+                            <span class="bg-blue-100 text-blue-800 text-sm font-medium px-3 py-1 rounded-full">混合製作</span>
+                            <span class="bg-gray-100 text-gray-800 text-sm font-medium px-3 py-1 rounded-full">AI 僅為輔助</span>
+                        </div>
+                        <p class="text-gray-700 text-base">
+                            首次在主流廣告中使用 AI (Stable Diffusion)，結合真人拍攝與數位特效。AI 只是眾多技術之一，並未大量運用。故事流暢，視覺創新，獲得了不錯的正面評價。
+                        </p>
+                    </div>
+
+                    <div id="tab-2024" class="tab-content bg-white p-8 rounded-xl shadow-lg hidden">
+                        <h3 class="text-2xl font-bold mb-4">2024: 《Holidays Are Coming》 (AI 重製)</h3>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-red-100 text-red-800 text-sm font-medium px-3 py-1 rounded-full">👎 劣評 (翻車)</span>
+                            <span class="bg-purple-100 text-purple-800 text-sm font-medium px-3 py-1 rounded-full">純 AI 重製</span>
+                            <span class="bg-gray-100 text-gray-800 text-sm font-medium px-3 py-1 rounded-full">缺乏靈魂</span>
+                        </div>
+                        <p class="text-gray-700 text-base">
+                            使用 AI 重製 1995 年的經典廣告。然而，帶著滿滿 AI 僵硬感的廣告引發極大負面批評，被認為「缺乏靈魂」，與經典廣告的情感記憶產生巨大衝突。
+                        </p>
+                    </div>
+
+                    <div id="tab-2025" class="tab-content bg-white p-8 rounded-xl shadow-lg hidden">
+                        <h3 class="text-2xl font-bold mb-4">2025: 《Refresh Your Holidays》</h3>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-yellow-100 text-yellow-800 text-sm font-medium px-3 py-1 rounded-full">🤔 評價不一</span>
+                            <span class="bg-blue-100 text-blue-800 text-sm font-medium px-3 py-1 rounded-full">AI + 真人雙策略</span>
+                        </div>
+                        <p class="text-gray-700 text-base">
+                            推出兩支廣告：<br>
+                            1. <strong>AI 重製版:</strong> 畫面精緻度提升，但角色外觀「塑膠」、表演「空洞」，依舊違和。<br>
+                            2. <strong>真人拍攝版:</strong> 雖然沒太多新意，但至少能感受到「情感溫度」。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="comparison" class="bg-white">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl font-bold text-center mb-4">2025 年的雙重策略</h2>
+                <p class="text-lg text-gray-600 text-center max-w-3xl mx-auto mb-12">
+                    2025 年，可口可樂同時推出了 AI 廣告和真人廣告，形成鮮明對比。本節直接比較這兩支廣告在報告中的核心評價，突顯「情感溫度」的差異。
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                    <div class="border border-gray-200 rounded-lg p-6 text-center">
+                        <span class="text-5xl mb-4 block" role="img" aria-label="Robot">🤖</span>
+                        <h3 class="text-2xl font-bold mb-3">AI 版:《Holidays Are Coming》</h3>
+                        <p class="text-gray-600">
+                            技術進步，畫面精緻。但動物角色外觀被評為「塑膠感」，表演「空洞」，依舊感覺<span class="font-semibold text-red-600">違和</span>。
+                        </p>
+                    </div>
+                    <div class="border border-gray-200 rounded-lg p-6 text-center">
+                        <span class="text-5xl mb-4 block" role="img" aria-label="Heart">❤️</span>
+                        <h3 class="text-2xl font-bold mb-3">真人版:《A Holiday Memory》</h3>
+                        <p class="text-gray-600">
+                            雖然敘事上沒有太多新意，但至少能讓觀眾感受到熟悉的「情感溫度」。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="findings" class="bg-gray-50">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl font-bold text-center mb-4">關鍵洞察</h2>
+                <p class="text-lg text-gray-600 text-center max-w-3xl mx-auto mb-12">
+                    從這三年的案例中，我們可以總結出幾個關鍵的洞察。這不僅關乎技術，更關乎品牌如何與觀眾建立真正的情感連結。
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="bg-white p-6 rounded-lg shadow-md transition-shadow hover:shadow-lg">
+                        <span class="text-4xl coke-red mb-3 block" role="img" aria-label="Broken Heart">💔</span>
+                        <h3 class="text-xl font-bold mb-2">致命傷：敘事與情感</h3>
+                        <p class="text-gray-600">
+                            報告的核心觀點：無論技術多新，缺乏故事性與情感連結，就無法引起觀眾共鳴。
+                        </p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md transition-shadow hover:shadow-lg">
+                        <span class="text-4xl coke-red mb-3 block" role="img" aria-label="Magic Wand">✨</span>
+                        <h3 class="text-xl font-bold mb-2">「另一個版本」: AI + VFX</h3>
+                        <p class="text-gray-600">
+                            LinkedIn 上的補充版本結合了 AI 與 VFX (數位特效)，展現了「更有故事性」的可能，暗示混合製作可能是比純 AI 更好的出路。
+                        </p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md transition-shadow hover:shadow-lg">
+                        <span class="text-4xl coke-red mb-3 block" role="img" aria-label="Brain">🧠</span>
+                        <h3 class="text-xl font-bold mb-2">技術 vs. 靈魂</h3>
+                        <p class="text-gray-600">
+                            2025 年的雙重策略像是一場對照實驗。AI 提供了「效率」和「新奇」，但真人版提供了「溫度」。品牌似乎仍在摸索兩者的平衡點。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-gray-800 text-gray-300 py-8">
+        <div class="container mx-auto px-6 text-center">
+            <p class="text-sm">這是一個基於所提供報告生成的互動式網頁分析。</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const tabButtons = document.querySelectorAll('.tab-button');
+            const tabContents = document.querySelectorAll('.tab-content');
+
+            tabButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const targetTab = button.getAttribute('data-tab');
+
+                    tabButtons.forEach(btn => {
+                        btn.classList.remove('tab-active');
+                        btn.classList.add('tab-inactive');
+                    });
+                    
+                    button.classList.add('tab-active');
+                    button.classList.remove('tab-inactive');
+
+                    tabContents.forEach(content => {
+                        if (content.id === 'tab-' + targetTab) {
+                            content.classList.remove('hidden');
+                        } else {
+                            content.classList.add('hidden');
+                        }
+                    });
+                });
+            });
+
+            const navLinks = document.querySelectorAll('header nav a');
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const targetId = link.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    if(targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>
